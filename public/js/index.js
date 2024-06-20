@@ -62,3 +62,14 @@ window.addEventListener('closeEditModal', event => {
     $('#employeeEditModal').modal('hide')
     $('.modal-backdrop').remove();
 });
+
+// Hot fixed for pagination issue.
+window.addEventListener('load', function() {
+    if (performance.navigation.type === 1) {
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('page')) {
+            url.searchParams.set('page', '1');
+            window.location.replace(url.toString());
+        }
+    }
+});
