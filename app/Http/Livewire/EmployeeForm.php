@@ -6,21 +6,14 @@ use Livewire\Component;
 use App\Models\Employee;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreEmployeeRequest;
 
 class EmployeeForm extends Component
 {
     use WithFileUploads;
 
     public $first_name, $last_name, $email, $phone, $post, $avatar;
-
-    protected $rules = [
-        'first_name' => 'required',
-        'last_name' => 'required',
-        'email' => 'required|email|unique:employees,email',
-        'phone' => 'nullable',
-        'post' => 'required',
-        'avatar' => 'nullable|image|max:1024'
-    ];
 
     public function render()
     {
@@ -29,7 +22,7 @@ class EmployeeForm extends Component
 
     public function store()
     {
-        $validatedData = $this->validate();
+        $validatedData = Validator::make($this->all(), (new StoreEmployeeRequest)->rules())->validate();
 
         if ($this->avatar) {
             $validatedData['avatar'] = $this->avatar->store('avatars', 'public');

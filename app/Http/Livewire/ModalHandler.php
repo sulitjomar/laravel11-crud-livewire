@@ -6,8 +6,9 @@ use Livewire\Component;
 
 class ModalHandler extends Component
 {
-    public $showModal = false;
     protected $listeners = ['openModal', 'closeModal'];
+    
+    public $showModal = false;
 
     public function openModal()
     {
