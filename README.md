@@ -56,13 +56,19 @@ Before getting started, make sure you have the following installed:
     php artisan migrate
     ```
 
-7. Generate an application key:
+7. Run storage link
+
+    ```bash
+    php artisan storage:link
+    ```
+
+8. Generate an application key:
 
     ```bash
     php artisan key:generate
     ```
 
-8. Run the project:
+9.  Run the project:
 
     ```bash
     php artisan serve
