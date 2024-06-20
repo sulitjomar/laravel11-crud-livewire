@@ -5,26 +5,17 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Employee;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UpdateEmployeeRequest;
 
 class EditEmployeeForm extends Component
 {
     use WithFileUploads;
 
-    public $employeeId;
-    public $first_name, $last_name, $email, $phone, $post, $avatar;
-    public $currentAvatarUrl;
-    public $showEditModal = false;
-
     protected $listeners = ['getModalId', 'delete'];
 
-    protected $rules = [
-        'first_name' => 'required',
-        'last_name' => 'required',
-        'email' => 'required|email',
-        'phone' => 'nullable',
-        'post' => 'required',
-        'avatar' => 'nullable|image|max:1024'
-    ];
+    public $employeeId, $first_name, $last_name, $email, $phone, $post, $avatar, $currentAvatarUrl;
+    public $showEditModal = false;
 
     public function getModalId($employeeId)
     {
@@ -54,15 +45,15 @@ class EditEmployeeForm extends Component
 
     public function update()
     {
-        $data = $this->validate();
+        $validatedData = Validator::make($this->all(), (new UpdateEmployeeRequest)->rules())->validate();
 
         if ($this->avatar instanceof \Livewire\TemporaryUploadedFile) {
-            $data['avatar'] = $this->avatar->store('avatars', 'public');
+            $validatedData['avatar'] = $this->avatar->store('avatars', 'public');
         }
 
         if ($this->employeeId) {
             $employee = Employee::find($this->employeeId);
-            $employee->update($data);
+            $employee->update($validatedData);
         }
 
         $this->reset(['first_name', 'last_name', 'email', 'phone', 'post', 'avatar']);
