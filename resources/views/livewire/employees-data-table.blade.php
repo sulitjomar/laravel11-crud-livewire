@@ -49,7 +49,7 @@
                         <td class="align-middle">{{ $employee->id }}</td>
                         <td>
                             <div class="bg-white d-inline-block rounded-circle px-1 py-1">
-                                <img src="{{ asset('storage/' . $employee->avatar) }}" alt="image" width="50" height="50" class="rounded-circle">
+                                <img src="{{ $employee->avatar ? asset('storage/' . $employee->avatar) : 'https://0.gravatar.com/avatar/22bd03ace6f176bfe0c593650bcf45d8' }}" alt="image" width="50" height="50" class="rounded-circle">
                             </div>
                         </td>
                         <td class="align-middle">{{ $employee->first_name }} {{ $employee->last_name }}</td>
