@@ -16,13 +16,12 @@ class EmployeeFactory extends Factory
      */
     public function definition(): array
     {
-        // return [
-        //     'first_name' => $this->faker->firstName,
-        //     'last_name' => $this->faker->lastName,
-        //     'email' => $this->faker->unique()->safeEmail,
-        //     'phone' => $this->faker->phoneNumber,
-        //     'post' => $this->faker->jobTitle,
-        //     'avatar' => $this->faker->imageUrl(100, 100, 'people'),
-        // ];
+        return [
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'email' => $this->faker->unique()->safeEmail,
+            'phone' => $this->faker->phoneNumber,
+            'post' => $this->faker->jobTitle
+        ];
     }
 }

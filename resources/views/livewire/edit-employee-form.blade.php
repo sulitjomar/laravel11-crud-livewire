@@ -45,6 +45,8 @@
                 <img src="{{ $avatar->temporaryUrl() }}" alt="Avatar Preview" width="150" height="150">
             @elseif ($currentAvatarUrl)
                 <img src="{{ $currentAvatarUrl }}" alt="Current Avatar" width="150" height="150">
+            @else
+                <img src="https://0.gravatar.com/avatar/22bd03ace6f176bfe0c593650bcf45d8" alt="Default Avatar" width="150" height="150">
             @endif
         </div>
     </form>
